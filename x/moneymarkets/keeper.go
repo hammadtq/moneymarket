@@ -208,7 +208,7 @@ func (k Keeper) RedeemFromMarketPosition(ctx sdk.Context, Owner sdk.AccAddress, 
 }
 
 // RedeemFromMarketPosition - redeem from a token market
-func (k Keeper) RepayToMarketPosition(ctx sdk.Context, Owner sdk.AccAddress, market string, repayTokens sdk.Coins) {
+func (k Keeper) RepayToMarketPosition(ctx sdk.Context, Owner sdk.AccAddress, market string, repayTokens sdk.Coins, borrowCollateral sdk.Coins) {
 	if Owner.Empty() {
 		return
 	}
@@ -216,6 +216,7 @@ func (k Keeper) RepayToMarketPosition(ctx sdk.Context, Owner sdk.AccAddress, mar
 	marketposition.Owner = Owner
 	marketposition.Market = market
 	marketposition.BorrowTokens = marketposition.BorrowTokens.Sub(repayTokens)
+	marketposition.BorrowCollateral = marketposition.BorrowCollateral.Sub(borrowCollateral)
 	//fmt.Println(marketposition)
 	store := ctx.KVStore(k.storeKey)
 	store.Set([]byte(Owner), k.cdc.MustMarshalBinaryBare(marketposition))

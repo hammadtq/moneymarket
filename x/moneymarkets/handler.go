@@ -157,7 +157,7 @@ func handleMsgRepayToMarket(ctx sdk.Context, keeper Keeper, msg MsgRepayToMarket
 			return sdk.ErrInsufficientCoins("You do not have enough coins").Result()
 		}
 
-	keeper.RepayToMarketPosition(ctx, msg.Borrower, msg.Market, msg.RepayTokens)
+	keeper.RepayToMarketPosition(ctx, msg.Borrower, msg.Market, msg.RepayTokens, marketposition.BorrowCollateral)
 	//keeper.SetPrice(ctx, msg.Name, msg.Bid)
 	return sdk.Result{}
 }

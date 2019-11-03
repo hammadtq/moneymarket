@@ -1,0 +1,16 @@
+#!/bin/bash
+nscli tx moneymarkets create-market nametoken-xyztoken nxyz 5nametoken nametoken xyztoken --from jack
+Sleep 10
+nscli query moneymarkets marketinfo nametoken-xyztoken
+Sleep 10
+nscli tx moneymarkets supply-market nametoken-xyztoken 5nametoken --from jack
+Sleep 10
+nscli query moneymarkets marketposition cosmos1clsx4ddqfs2ey0jdyn4r3d3andcpmvve60c0wq
+Sleep 10
+nscli tx moneymarkets borrow-from-market nametoken-xyztoken 5nametoken 10xyztoken --from alice
+Sleep 10
+nscli query moneymarkets marketposition cosmos1sjj8lgpvfa2c3ya325a3gkguzxqwpwmd7fewhr
+Sleep 10
+nscli tx  moneymarkets repay-to-market nametoken-xyztoken 5nametoken --from alice
+Sleep 10
+nscli query moneymarkets marketposition cosmos1sjj8lgpvfa2c3ya325a3gkguzxqwpwmd7fewhr
